@@ -19,7 +19,8 @@ body {
   max-width: 48%;
   height: 100px;
   margin: 0 auto;
-  font-size: 3em;
+  font-size: 1em;
+  overflow-wrap: break-word;
 }
 
 .calculator__row1 {
