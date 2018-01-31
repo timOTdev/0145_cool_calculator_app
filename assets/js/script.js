@@ -1,218 +1,179 @@
-let one = document.querySelector("#one");
-let two = document.querySelector("#two");
-let three = document.querySelector("#three");
-let four = document.querySelector("#four");
-let five = document.querySelector("#five");
-let six = document.querySelector("#six");
-let seven = document.querySelector("#seven");
-let eight = document.querySelector("#eight");
-let nine = document.querySelector("#nine");
-let zero = document.querySelector("#zero");
-let viewScreen = document.querySelector(".calculator__view");
-let frontstage = document.querySelector(".calculator__view__screen");
-let backstage = "";
+let compute = document.querySelector(".calculator__view__compute");
+let result = document.querySelector(".calculator__view__result");
+let computeHistory = "";
+let resultHistory;
+
+function createNumberResult(num) {
+  return (
+    resultHistory = "",
+    compute.append(num),
+    computeHistory += num,
+    console.log(computeHistory)
+  )
+}
+
+function createOperationResult(character) {
+  if (resultHistory) {
+    compute.innerHTML = "",
+    computeHistory = "",
+    resultHistory + character,
+    computeHistory = resultHistory + character,
+    compute.innerHTML += resultHistory + character
+  } else {
+    computeHistory += character;
+    compute.append(character);
+  }
+  console.log(computeHistory);
+}
+
+function createNumberListener(selector, character) {
+  let createSelector = document.querySelector(`#${selector}`);
+  return (
+    createSelector.addEventListener("click", (event) => {
+      createNumberResult(character);
+    })
+  )
+}
+
+function createOperationListener(selector, character) {
+  let createSelector = document.querySelector(`#${selector}`);
+  return (
+    createSelector.addEventListener("click", (event) => {
+      createOperationResult(character);
+    })
+  )
+}
 
 // Click Listeners
-zero.addEventListener("click", (event) => {
-  backstage += 0;
-  frontstage.append("0");
-  console.log(backstage);
-})
-one.addEventListener("click", (event) => {
-  backstage += 1;
-  frontstage.append("1");
-  console.log(backstage);
-})
-two.addEventListener("click", (event) => {
-  backstage += 2;
-  frontstage.append("2");
-  console.log(backstage);
-})
-three.addEventListener("click", (event) => {
-  backstage += 3;
-  frontstage.append("3");
-  console.log(backstage);
-})
-four.addEventListener("click", (event) => {
-  backstage += 4;
-  frontstage.append("4");
-  console.log(backstage);
-})
-five.addEventListener("click", (event) => {
-  backstage += 5;
-  frontstage.append("5");
-  console.log(backstage);
-})
-six.addEventListener("click", (event) => {
-  backstage += 6;
-  frontstage.append("6");
-  console.log(backstage);
-})
-seven.addEventListener("click", (event) => {
-  backstage += 7;
-  frontstage.append("7");
-  console.log(backstage);
-})
-eight.addEventListener("click", (event) => {
-  backstage += 8;
-  frontstage.append("8");
-  console.log(backstage);
-})
-nine.addEventListener("click", (event) => {
-  backstage += 9;
-  frontstage.append("9");
-  console.log(backstage);
-})
-add.addEventListener("click", (event) => {
-  backstage += "+";
-  frontstage.append("+");
-  console.log(backstage);
-})
-subtract.addEventListener("click", (event) => {
-  backstage += "-";
-  frontstage.append("-");
-  console.log(backstage);
-})
-multiply.addEventListener("click", (event) => {
-  backstage += "*";
-  frontstage.append("×");
-  console.log(backstage);
-})
-divide.addEventListener("click", (event) => {
-  backstage += "/";
-  frontstage.append("÷");
-  console.log(backstage);
-})
-decimal.addEventListener("click", (event) => {
-  backstage += ".";
-  frontstage.append(".");
-  console.log(backstage);
-})
+createNumberListener(zero.id, 0);
+createNumberListener(one.id, 1);
+createNumberListener(two.id, 2);
+createNumberListener(three.id, 3);
+createNumberListener(four.id, 4);
+createNumberListener(five.id, 5);
+createNumberListener(six.id, 6);
+createNumberListener(seven.id, 7);
+createNumberListener(eight.id, 8);
+createNumberListener(nine.id, 9);
+createNumberListener(decimal.id, ".");
+createOperationListener(add.id, "+");
+createOperationListener(subtract.id, "-");
+createOperationListener(multiply.id, "*");
+createOperationListener(divide.id, "/");
+
 equal.addEventListener("click", (event) => {
-  backstage = eval(backstage);
-  frontstage.innerHTML = backstage;
-  if (Math.sign(backstage) === 1) {
-    viewScreen.setAttribute("style","background: green;");
+  resultHistory = eval(computeHistory);
+  console.log(resultHistory);
+  result.innerHTML = resultHistory;
+
+  if (Math.sign(resultHistory) === 1) {
+    result.setAttribute("style","color: green;");
   } 
-  else if (Math.sign(backstage) === -1) {
-    viewScreen.setAttribute("style","background: red;");
-  } else if (Math.sign(backstage) === 0) {
-    viewScreen.setAttribute("style", "background: yellow; color: black;")
+  else if (Math.sign(resultHistory) === -1) {
+    result.setAttribute("style","color: red;");
+  } 
+  else if (Math.sign(resultHistory) === 0) {
+    result.setAttribute("style", "color: yellow;")
   }
-  console.log(backstage);
-})
+}) 
 backspace.addEventListener("click", (event) => {
-  backstage = backstage.slice(0, -1);
-  frontstage.innerHTML = backstage;
-  console.log(backstage);
+  computeHistory = computeHistory.slice(0, -1);
+  compute.innerHTML = computeHistory;
+  console.log(computeHistory);
 })
-clear.addEventListener("click", (event) => {
-  backstage = "";
-  frontstage.innerHTML = "";
-  viewScreen.setAttribute("style","background: none; color: none;");
-  console.log(backstage);
+clearAll.addEventListener("click", (event) => {
+  compute.innerHTML = "";
+  result.innerHTML = "";
+  resultHistory = "";
+  computeHistory = "";
+  console.log(resultHistory);
+})
+clearCompute.addEventListener("click", (event) => {
+  compute.innerHTML = "";
+  computeHistory = "";
+  resultHistory = "";
+  console.log(resultHistory);
 })
 
 // Keypress Listeners
 document.addEventListener('keydown', (event) => {
   switch (event.key) {
-    case "0":
-      backstage += 0;
-      frontstage.append("0");
+    case "0": 
+      createNumberResult(0);
       break;
-    case "1":
-      backstage += 1;
-      frontstage.append("1");
-      console.log(backstage);
+    case "1": 
+      createNumberResult(1);
       break;
-    case "2":
-      backstage += 2;
-      frontstage.append("2");
-      console.log(backstage);
+    case "2": 
+      createNumberResult(2);
       break;
-    case "3":
-      backstage += 3;
-      frontstage.append("3");
-      console.log(backstage);
+    case "3": 
+      createNumberResult(3);
       break;
-    case "4":
-    backstage += 4;
-      frontstage.append("4");
-      console.log(backstage);
+    case "4": 
+      createNumberResult(4);
       break;
-    case "5":
-      backstage += 5;
-      frontstage.append("5");
-      console.log(backstage);
+    case "5": 
+      createNumberResult(5);
       break;
-    case "6":
-      backstage += 6;
-      frontstage.append("6");
-      console.log(backstage);
+    case "6": 
+      createNumberResult(6);
       break;
-    case "7":
-      backstage += 7;
-      frontstage.append("7");
-      console.log(backstage);
+    case "7": 
+      createNumberResult(7);
       break;
-    case "8":
-      backstage += 8;
-      frontstage.append("8");
-      console.log(backstage);
+    case "8": 
+      createNumberResult(8);
       break;
-    case "9":
-      backstage += 9;
-      frontstage.append("9");
-      console.log(backstage);
-      break;
-    case "+":
-      backstage += "+";
-      frontstage.append("+");
-      break;
-    case "-":
-      backstage += "-";
-      frontstage.append("-");
-      break;
-    case "*":
-      backstage += "*";
-      frontstage.append("×");
-      break;
-    case "/":
-      backstage += "/";
-      frontstage.append("÷");
+    case "9": 
+      createNumberResult(9);
       break;
     case ".":
-      backstage += ".";
-      frontstage.append(".");
+      createNumberResult("."); 
       break;
+    case "+": 
+      createOperationResult("+");
+      break;
+    case "-": 
+      createOperationResult("-");
+      break;
+    case "*": 
+      createOperationResult("*");
+      break;
+    case "/": 
+      createOperationResult("/");
+      break;
+
     case "Enter":
-      backstage = eval(backstage);
-      frontstage.innerHTML = backstage;
-      if (Math.sign(backstage) === 1) {
-        viewScreen.setAttribute("style","background: green;");
+      resultHistory = eval(computeHistory);
+      console.log(resultHistory);
+      result.innerHTML = resultHistory;
+    
+      if (Math.sign(resultHistory) === 1) {
+        result.setAttribute("style","color: green;");
       } 
-      else if (Math.sign(backstage) === -1) {
-        viewScreen.setAttribute("style","background: red;");
-      } else if (Math.sign(backstage) === 0) {
-        viewScreen.setAttribute("style", "background: yellow; color: black;")
+      else if (Math.sign(resultHistory) === -1) {
+        result.setAttribute("style","color: red;");
+      } 
+      else if (Math.sign(resultHistory) === 0) {
+        result.setAttribute("style", "color: yellow;")
       }
       break;
+
     case "Backspace":
-      backstage = backstage.slice(0, -1);
-      frontstage.innerHTML = backstage;
-      break;
-    case "Clear":
-      backstage = "";
-      frontstage.innerHTML = "";
-      viewScreen.setAttribute("style","background: none; color: none;");
+      computeHistory = computeHistory.slice(0, -1);
+      compute.innerHTML = computeHistory;
+      console.log(computeHistory);
       break;
   }
 });
 
 window.onkeydown = (event) => {
   if ( event.keyCode == 27 ) {
-    backstage = "";
-    frontstage.innerHTML = "";
-    viewScreen.setAttribute("style","background: none; color: none;");
+    compute.innerHTML = "";
+    result.innerHTML = "";
+    resultHistory = "";
+    computeHistory = "";
+    console.log(resultHistory);
   }
 };
