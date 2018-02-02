@@ -1,45 +1,101 @@
-let compute = document.querySelector(".calculator__view__compute");
-let result = document.querySelector(".calculator__view__result");
-let computeHistory = "";
-let resultHistory;
+let screen = document.querySelector(".calculator__view__compute");
+let calc = [];
+let total = 0;
 
-function createNumberResult(num) {
+function createNumberResult(number) {
   return (
-    resultHistory = "",
-    compute.append(num),
-    computeHistory += num,
-    console.log(computeHistory)
+    calc.push(number),
+    screen.append(number),
+    console.log(calc)
   )
 }
 
-function createOperationResult(character) {
-  if (resultHistory) {
-    compute.innerHTML = "",
-    computeHistory = "",
-    resultHistory + character,
-    computeHistory = resultHistory + character,
-    compute.innerHTML += resultHistory + character
-  } else {
-    computeHistory += character;
-    compute.append(character);
-  }
-  console.log(computeHistory);
-}
-
-function createNumberListener(selector, character) {
+function createNumberListener(selector, number) {
   let createSelector = document.querySelector(`#${selector}`);
   return (
     createSelector.addEventListener("click", (event) => {
-      createNumberResult(character);
+      createNumberResult(number);
     })
   )
 }
 
-function createOperationListener(selector, character) {
+function createOperationResult(operator) {
+  switch(operator) {
+    case "+":
+      screen.append(operator);
+      calc.push(operator);
+      console.log(calc);
+      break;
+    case "-":
+      screen.append(operator);
+      calc.push(operator);
+      console.log(calc);
+      break;
+    case "*":
+      screen.append(operator);
+      calc.push(operator);
+      console.log(calc);
+      break;
+    case "/":
+      screen.append(operator);
+      calc.push(operator);
+      console.log(calc);
+      break;
+    case "=":
+      while(calc.length !== 1) {
+        // calc.forEach( (element, index) => {
+        //   if (typeof index === "number" && typeof index+1 === "number") {
+        //     let join = calc.slice(index, 1);
+        //     console.log(join);
+        //   }
+        // })
+        calc.forEach( (element, index) => {
+          if (element === "*") {
+            let calculation = calc[index-1] * calc[index+1];
+            calc.splice(index-1, 3, calculation);
+          }
+        })
+        
+        calc.forEach( (element, index) => {
+          if (element === "/") {
+            let calculation = calc[index-1] / calc[index+1];
+            calc.splice(index-1, 3, calculation);
+          }
+        })
+        
+        calc.forEach( (element, index) => {
+          if (element === "+") {
+            let calculation = calc[index-1] + calc[index+1];
+            calc.splice(index-1, 3, calculation);
+          }
+        })
+        
+        calc.forEach( (element, index) => {
+          if (element === "-") {
+            let calculation = calc[index-1] - calc[index+1];
+            calc.splice(index-1, 3, calculation);
+          }
+        })
+      }
+      console.log(calc);
+      screen.innerHTML = calc[0];
+      break;
+    case "⌫":
+      calc.splice(-1, 1);
+      screen.innerHTML = calc.join("");
+      break;
+    case "AC":
+      calc = [];
+      screen.innerHTML = "";
+      break;
+  }
+}
+
+function createOperationListener(selector, operator) {
   let createSelector = document.querySelector(`#${selector}`);
   return (
     createSelector.addEventListener("click", (event) => {
-      createOperationResult(character);
+      createOperationResult(operator);
     })
   )
 }
@@ -55,45 +111,13 @@ createNumberListener(six.id, 6);
 createNumberListener(seven.id, 7);
 createNumberListener(eight.id, 8);
 createNumberListener(nine.id, 9);
-createNumberListener(decimal.id, ".");
 createOperationListener(add.id, "+");
 createOperationListener(subtract.id, "-");
 createOperationListener(multiply.id, "*");
 createOperationListener(divide.id, "/");
-
-equal.addEventListener("click", (event) => {
-  resultHistory = eval(computeHistory);
-  console.log(resultHistory);
-  result.innerHTML = resultHistory;
-
-  if (Math.sign(resultHistory) === 1) {
-    result.setAttribute("style","color: green;");
-  } 
-  else if (Math.sign(resultHistory) === -1) {
-    result.setAttribute("style","color: red;");
-  } 
-  else if (Math.sign(resultHistory) === 0) {
-    result.setAttribute("style", "color: yellow;")
-  }
-}) 
-backspace.addEventListener("click", (event) => {
-  computeHistory = computeHistory.slice(0, -1);
-  compute.innerHTML = computeHistory;
-  console.log(computeHistory);
-})
-clearAll.addEventListener("click", (event) => {
-  compute.innerHTML = "";
-  result.innerHTML = "";
-  resultHistory = "";
-  computeHistory = "";
-  console.log(resultHistory);
-})
-clearCompute.addEventListener("click", (event) => {
-  compute.innerHTML = "";
-  computeHistory = "";
-  resultHistory = "";
-  console.log(resultHistory);
-})
+createOperationListener(equal.id, "=")
+createOperationListener(backspace.id, "⌫")
+createOperationListener(clear.id, "AC")
 
 // Keypress Listeners
 document.addEventListener('keydown', (event) => {
@@ -128,9 +152,6 @@ document.addEventListener('keydown', (event) => {
     case "9": 
       createNumberResult(9);
       break;
-    case ".":
-      createNumberResult("."); 
-      break;
     case "+": 
       createOperationResult("+");
       break;
@@ -143,37 +164,14 @@ document.addEventListener('keydown', (event) => {
     case "/": 
       createOperationResult("/");
       break;
-
     case "Enter":
-      resultHistory = eval(computeHistory);
-      console.log(resultHistory);
-      result.innerHTML = resultHistory;
-    
-      if (Math.sign(resultHistory) === 1) {
-        result.setAttribute("style","color: green;");
-      } 
-      else if (Math.sign(resultHistory) === -1) {
-        result.setAttribute("style","color: red;");
-      } 
-      else if (Math.sign(resultHistory) === 0) {
-        result.setAttribute("style", "color: yellow;")
-      }
+      createOperationResult("=");
       break;
-
     case "Backspace":
-      computeHistory = computeHistory.slice(0, -1);
-      compute.innerHTML = computeHistory;
-      console.log(computeHistory);
+      createOperationResult("⌫");
+      break;
+    case "Escape": 
+      createOperationResult("AC");
       break;
   }
 });
-
-window.onkeydown = (event) => {
-  if ( event.keyCode == 27 ) {
-    compute.innerHTML = "";
-    result.innerHTML = "";
-    resultHistory = "";
-    computeHistory = "";
-    console.log(resultHistory);
-  }
-};

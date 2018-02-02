@@ -1,39 +1,58 @@
 body {
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
   text-align: center;
   font-size: xx-large;
   color: white;
   background: black;
 }
 
+.main {
+  max-width: 50px;
+}
 a:visited {
   color: goldenrod;
 }
 
-.header h1 {
-  font-family: 'Libre Barcode 128 Text', cursive;
-  font-size: 3em;
+.dark {
+  background: darkgray;
 }
 
+.calculator {
+  display: inline-block;
+  max-width: 25%;
+  margin: 5% 0;
+  border: 5px solid gray;
+  border-radius: 5%;
+  background: white;
+  color: black;
+  box-shadow: 5px 5px 5px gray;
+}
 .calculator button {
   font-size: xx-large;
   width: 20%;
   height: 75px;
   margin: 2%;
+  border-radius: 5%;
+  box-shadow: 3px 3px 3px gray;
 }
 
-.calculator button:hover {
-  background: green;
-  color: lawngreen;
+.calculator button:hover,
+#clear:hover,
+#backspace:hover {
+  background: gold;
+  color: white;
   transform: scale(1.1);
 }
 
 .calculator__view {
-  border: 1px solid white;
-  max-width: 48%;
-  height: 100px;
+  border: 3px solid gray;
+  box-shadow: 3px 3px 3px gray;
+  border-radius: 5%;
+  max-width: 80%;
+  height: 150px;
   margin: 0 auto;
+  margin-top: 5%;
   font-size: 1em;
   overflow-wrap: break-word;
   overflow: auto;
@@ -45,56 +64,57 @@ a:visited {
 }
 
 .calculator__view__compute {
-  text-align: left;
-  font-size: 1.2em;
-}
-
-.calculator__view__result {
   text-align: right;
-  font-size: 1.2em;
-  text-decoration: underline;
-  font-weight: bold;
+  font-size: 2em;
 }
 
 .calculator__row1 {
   display: flex;
   margin: 0 auto;
-  max-width: 50%;
+  max-width: 80%;
   justify-content: space-around;
+  align-items: center;
+  font-family: 'Libre Barcode 128 Text', cursive;
+}
+
+#clear,
+#backspace {
+  background: salmon;
 }
 
 .calculator__row1 {
   display: flex;
   margin: 0 auto;
-  max-width: 50%;
+  max-width: 80%;
   justify-content: space-around;
 }
 
 .calculator__row2 {
   display: flex;
   margin: 0 auto;
-  max-width: 50%;
+  max-width: 80%;
   justify-content: space-around;
 }
 
 .calculator__row3 {
   display: flex;
   margin: 0 auto;
-  max-width: 50%;
+  max-width: 80%;
   justify-content: space-around;
 }
 
 .calculator__row4 {
   display: flex;
   margin: 0 auto;
-  max-width: 50%;
+  max-width: 80%;
   justify-content: space-around;
 }
 
 .calculator__row5 {
   display: flex;
   margin: 0 auto;
-  max-width: 50%;
+  margin-bottom: 5%;
+  max-width: 80%;
   justify-content: space-around;
 }
 
