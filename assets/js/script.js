@@ -1,12 +1,13 @@
 let screen = document.querySelector(".calculator__view__compute");
 let calc = [];
+let value = [];
 let total = 0;
 
 function createNumberResult(number) {
   return (
-    calc.push(number),
-    screen.append(number),
-    console.log(calc)
+    console.log(calc),
+    value.push(number),
+    screen.append(number)
   )
 }
 
@@ -22,44 +23,83 @@ function createNumberListener(selector, number) {
 function createOperationResult(operator) {
   switch(operator) {
     case "+":
-      screen.append(operator);
-      calc.push(operator);
+      if (total) {
+        calc.push(total);
+        calc.push(operator);
+        screen.append(operator);
+        value = [];
+      } 
+      else {
+        calc.push(Number(value.join("")));
+        calc.push(operator);
+        screen.append(operator);
+        value = [];
+      }
       console.log(calc);
       break;
     case "-":
-      screen.append(operator);
-      calc.push(operator);
+      if (total) {
+        calc.push(total);
+        calc.push(operator);
+        screen.append(operator);
+        value = [];
+      }
+      else {
+        calc.push(Number(value.join("")));
+        calc.push(operator);
+        screen.append(operator);
+        value = [];
+      }
       console.log(calc);
       break;
     case "*":
-      screen.append(operator);
-      calc.push(operator);
+      if (total) {
+        calc.push(total);
+        calc.push(operator);
+        screen.append(operator);
+        value = [];
+      }
+      else {
+        calc.push(Number(value.join("")));
+        calc.push(operator);
+        screen.append(operator);
+        value = [];
+      }
       console.log(calc);
       break;
     case "/":
-      screen.append(operator);
-      calc.push(operator);
+      if (total) {
+        calc.push(total);
+        calc.push(operator);
+        screen.append(operator);
+        value = [];
+      }
+      else {
+        calc.push(Number(value.join("")));
+        calc.push(operator);
+        screen.append(operator);
+        value = [];
+      }
       console.log(calc);
       break;
     case "=":
+      calc.push(Number(value.join("")));
       while(calc.length !== 1) {
-        // calc.forEach( (element, index) => {
-        //   if (typeof index === "number" && typeof index+1 === "number") {
-        //     let join = calc.slice(index, 1);
-        //     console.log(join);
-        //   }
-        // })
+        calc.forEach( (ele, index) => {
+          if (typeof calc[index] === typeof calc[index+1]) {
+            let cut = calc.slice(index, index+2).join("");
+            calc.splice(index, 3, cut);
+          }
+        })
         calc.forEach( (element, index) => {
           if (element === "*") {
             let calculation = calc[index-1] * calc[index+1];
             calc.splice(index-1, 3, calculation);
-          }
-        })
-        
-        calc.forEach( (element, index) => {
-          if (element === "/") {
+            total = calculation;
+          } else if (element === "/") {
             let calculation = calc[index-1] / calc[index+1];
-            calc.splice(index-1, 3, calculation);
+            calc.splice(index-1, 3, calculation); 
+            total = calculation;
           }
         })
         
@@ -67,18 +107,21 @@ function createOperationResult(operator) {
           if (element === "+") {
             let calculation = calc[index-1] + calc[index+1];
             calc.splice(index-1, 3, calculation);
-          }
-        })
-        
-        calc.forEach( (element, index) => {
-          if (element === "-") {
+            total = calculation;
+          } else if (element === "-") {
             let calculation = calc[index-1] - calc[index+1];
             calc.splice(index-1, 3, calculation);
+            total = calculation;
           }
         })
+
+        console.log("calc: " + calc);
+        console.log("value: " + value);
+        console.log("total: " + total);
       }
-      console.log(calc);
       screen.innerHTML = calc[0];
+      calc = [];
+      value = [];
       break;
     case "⌫":
       calc.splice(-1, 1);
@@ -86,7 +129,10 @@ function createOperationResult(operator) {
       break;
     case "AC":
       calc = [];
+      value = [];
+      total = 0;
       screen.innerHTML = "";
+      console.log(calc);
       break;
   }
 }
