@@ -1,4 +1,4 @@
-let screen = document.querySelector(".calculator__view__compute");
+let screen = document.querySelector(".calculator__view__screen");
 let calc = [];
 let value = [];
 let total = 0;
