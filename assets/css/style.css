@@ -46,6 +46,13 @@ a:visited {
   transform: scale(0.9);
 }
 
+.button:active,
+.button-active {
+  background: gold;
+  color: white;
+  transform: scale(0.9);
+}
+
 .calculator__view {
   background: #CAC7B2;
   border: 3px solid black;

@@ -3,94 +3,203 @@ let calc = [];
 let value = [];
 let total = 0;
 
-function createNumberResult(number) {
+// Click Listeners 
+createNumberListener(0, zero.id);
+createNumberListener(1, one.id);
+createNumberListener(2, two.id);
+createNumberListener(3, three.id);
+createNumberListener(4, four.id);
+createNumberListener(5, five.id);
+createNumberListener(6, six.id);
+createNumberListener(7, seven.id);
+createNumberListener(8, eight.id);
+createNumberListener(9, nine.id);
+createNumberListener(".", decimal.id);
+createOperationListener("+", add.id);
+createOperationListener("-", subtract.id);
+createOperationListener("*", multiply.id);
+createOperationListener("/", divide.id);
+createOperationListener("=", equal.id);
+createOperationListener("AC", clear.id);
+
+// Keydown Listeners for adding "button-active" class
+document.addEventListener('keydown', (event) => {
+  switch (event.key) {
+    case "0": 
+      createNumberResult(0, "zero");
+      break;
+    case "1": 
+      createNumberResult(1, "one");
+      break;
+    case "2": 
+      createNumberResult(2, "two");
+      break;
+    case "3": 
+      createNumberResult(3, "three");
+      break;
+    case "4": 
+      createNumberResult(4, "four");
+      break;
+    case "5": 
+      createNumberResult(5, "five");
+      break;
+    case "6": 
+      createNumberResult(6, "six");
+      break;
+    case "7": 
+      createNumberResult(7, "seven");
+      break;
+    case "8": 
+      createNumberResult(8, "eight");
+      break;
+    case "9": 
+      createNumberResult(9, "nine");
+      break;
+    case ".": 
+      createNumberResult(".", "decimal");
+      break;
+    case "+": 
+      createOperationResult("+", "add");
+      break;
+    case "-": 
+      createOperationResult("-", "subtract");
+      break;
+    case "*": 
+      createOperationResult("*", "multiply");
+      break;
+    case "/": 
+      createOperationResult("/", "divide");
+      break;
+    case "Enter":
+      createOperationResult("=", "equal");
+      break;
+    case "Escape": 
+      createOperationResult("AC", "clear");
+      break;
+  }
+});
+
+// Keyup Listeners for toggling "button-active" class
+document.addEventListener('keyup', (event) => {
+  switch (event.key) {
+    case "0": 
+      keyupEventHelper("zero");
+      break;
+    case "1": 
+      keyupEventHelper("one");
+      break;
+    case "2": 
+      keyupEventHelper("two");
+      break;
+    case "3": 
+      keyupEventHelper("three");
+      break;
+    case "4": 
+      keyupEventHelper("four");
+      break;
+    case "5":  
+      keyupEventHelper("five");
+      break;
+    case "6":  
+      keyupEventHelper("six");
+      break;
+    case "7":  
+      keyupEventHelper("seven");
+      break;
+    case "8":  
+      keyupEventHelper("eight");
+      break;
+    case "9":  
+      keyupEventHelper("nine");
+      break;
+    case ".":  
+      keyupEventHelper("decimal");
+      break;
+    case "+": 
+      keyupEventHelper("add");
+      break;
+    case "-":
+      keyupEventHelper("subtract");
+      break;
+    case "*": 
+      keyupEventHelper("multiply");
+      break;
+    case "/": 
+      keyupEventHelper("divide");
+      break;
+    case "Enter":
+      keyupEventHelper("equal");
+      break;
+    case "Escape": 
+      keyupEventHelper("clear");
+      break;
+  }
+})
+
+// Helper Functions
+function keyupEventHelper(selector) {
+  return document.getElementById(selector).classList.toggle("button-active");
+}
+
+function operationResultHelper(operator, selector) {
+  if (total) {
+    selector ? document.getElementById(selector).classList.add("button-active"): null;
+    return ( 
+      calc.push(total),
+      total = 0,
+      calc.push(operator),
+      screen.append(operator),
+      value = []
+    )
+  } 
+  else {
+    selector ? document.getElementById(selector).classList.add("button-active"): null;
+    return (
+      calc.push(Number(value.join(""))),
+      calc.push(operator),
+      screen.append(operator),
+      value = []
+    )
+  }
+}
+
+// Listener Reaction Functions
+function createNumberResult(number, selector) {
+  selector ? document.getElementById(selector).classList.add("button-active") : null;
   return (
-    console.log(calc),
     value.push(number),
     screen.append(number)
   )
 }
 
-function createNumberListener(selector, number) {
-  let createSelector = document.querySelector(`#${selector}`);
-  return (
-    createSelector.addEventListener("click", (event) => {
-      createNumberResult(number);
-    })
-  )
-}
-
-function createOperationResult(operator) {
+function createOperationResult(operator, selector) {
   switch(operator) {
     case "+":
-      if (total) {
-        calc.push(total);
-        calc.push(operator);
-        screen.append(operator);
-        value = [];
-      } 
-      else {
-        calc.push(Number(value.join("")));
-        calc.push(operator);
-        screen.append(operator);
-        value = [];
-      }
-      console.log(calc);
+      operationResultHelper(operator, selector);
       break;
     case "-":
-      if (total) {
-        calc.push(total);
-        calc.push(operator);
-        screen.append(operator);
-        value = [];
-      }
-      else {
-        calc.push(Number(value.join("")));
-        calc.push(operator);
-        screen.append(operator);
-        value = [];
-      }
-      console.log(calc);
+      operationResultHelper(operator, selector);
       break;
     case "*":
-      if (total) {
-        calc.push(total);
-        calc.push(operator);
-        screen.append(operator);
-        value = [];
-      }
-      else {
-        calc.push(Number(value.join("")));
-        calc.push(operator);
-        screen.append(operator);
-        value = [];
-      }
-      console.log(calc);
+      operationResultHelper(operator, selector);
       break;
     case "/":
-      if (total) {
-        calc.push(total);
-        calc.push(operator);
-        screen.append(operator);
-        value = [];
-      }
-      else {
-        calc.push(Number(value.join("")));
-        calc.push(operator);
-        screen.append(operator);
-        value = [];
-      }
-      console.log(calc);
+      operationResultHelper(operator, selector);
       break;
     case "=":
+      selector ? document.getElementById(selector).classList.add("button-active") : null;
       calc.push(Number(value.join("")));
+
+      // While the calc array still has operations to do...
       while(calc.length !== 1) {
+        // If index and index+1 are both numbers, slice them into "cut" and cut from calc array
         calc.forEach( (ele, index) => {
           if (typeof calc[index] === typeof calc[index+1]) {
             let cut = calc.slice(index, index+2).join("");
             calc.splice(index, 3, cut);
           }
         })
+        // If multiplication or division ocurs, carry out the operation
         calc.forEach( (element, index) => {
           if (element === "*") {
             let calculation = calc[index-1] * calc[index+1];
@@ -102,7 +211,7 @@ function createOperationResult(operator) {
             total = calculation;
           }
         })
-        
+        // If addition or subtraction occurs, carry out the operation
         calc.forEach( (element, index) => {
           if (element === "+") {
             let calculation = calc[index-1] + calc[index+1];
@@ -114,110 +223,36 @@ function createOperationResult(operator) {
             total = calculation;
           }
         })
-
-        console.log("calc: " + calc);
-        console.log("value: " + value);
-        console.log("total: " + total);
       }
-      screen.innerHTML = calc[0];
+      screen.innerHTML = total;
       calc = [];
       value = [];
       break;
-    case "⌫":
-      calc.splice(-1, 1);
-      screen.innerHTML = calc.join("");
-      break;
     case "AC":
+      selector ? document.getElementById(selector).classList.add("button-active") : null;
       calc = [];
       value = [];
       total = 0;
       screen.innerHTML = "";
-      console.log(calc);
       break;
   }
 }
 
-function createOperationListener(selector, operator) {
-  let createSelector = document.querySelector(`#${selector}`);
+// Listener Creator Functions
+function createNumberListener(number, selector) {
+  let createSelector = document.getElementById(selector);
+  return (
+    createSelector.addEventListener("click", (event) => {
+      createNumberResult(number);
+    })
+  )
+}
+
+function createOperationListener(operator, selector) {
+  let createSelector = document.getElementById(selector);
   return (
     createSelector.addEventListener("click", (event) => {
       createOperationResult(operator);
     })
   )
 }
-
-// Click Listeners
-createNumberListener(zero.id, 0);
-createNumberListener(one.id, 1);
-createNumberListener(two.id, 2);
-createNumberListener(three.id, 3);
-createNumberListener(four.id, 4);
-createNumberListener(five.id, 5);
-createNumberListener(six.id, 6);
-createNumberListener(seven.id, 7);
-createNumberListener(eight.id, 8);
-createNumberListener(nine.id, 9);
-createOperationListener(add.id, "+");
-createOperationListener(subtract.id, "-");
-createOperationListener(multiply.id, "*");
-createOperationListener(divide.id, "/");
-createOperationListener(equal.id, "=")
-createOperationListener(backspace.id, "⌫")
-createOperationListener(clear.id, "AC")
-
-// Keypress Listeners
-document.addEventListener('keydown', (event) => {
-  switch (event.key) {
-    case "0": 
-      createNumberResult(0);
-      break;
-    case "1": 
-      createNumberResult(1);
-      break;
-    case "2": 
-      createNumberResult(2);
-      break;
-    case "3": 
-      createNumberResult(3);
-      break;
-    case "4": 
-      createNumberResult(4);
-      break;
-    case "5": 
-      createNumberResult(5);
-      break;
-    case "6": 
-      createNumberResult(6);
-      break;
-    case "7": 
-      createNumberResult(7);
-      break;
-    case "8": 
-      createNumberResult(8);
-      break;
-    case "9": 
-      createNumberResult(9);
-      break;
-    case "+": 
-      createOperationResult("+");
-      break;
-    case "-": 
-      createOperationResult("-");
-      break;
-    case "*": 
-      createOperationResult("*");
-      break;
-    case "/": 
-      createOperationResult("/");
-      break;
-    case "Enter":
-      createOperationResult("=");
-      break;
-    case "Backspace":
-      createOperationResult("⌫");
-      break;
-    case "Escape": 
-      createOperationResult("AC");
-      break;
-  }
-});
