@@ -1,6 +1,6 @@
 # The Cool Calculator App by Timothy Hoang
 
-<figure><img src="./readme/cool-calculator-app.png" alt="The Cool Calculator App" style="width: 60%; display: block; margin-left: auto; margin-right: auto;"/><figcaption style=" text-align: center;">Calculator App</figcaption></figure>
+<figure><img src="./readme/cool-calculator-app.png" alt="The Cool Calculator App" style="width: 60%; display: block; margin-left: auto; margin-right: auto;"/></figure>
 
 ## About
 - The Calculator App is a basic app that carries out MDAS operations
@@ -35,6 +35,8 @@
 4. Open up your favorite editor and have fun
 
 ## More pictures
-<figure><img src="./readme/calculation.png" alt="Calculation Step" style="width: 75%; display: block; margin: 0 auto;"/><figcaption style=" text-align: center;">Calculation Step</figcaption></figure>
+### Calculation Step
+<figure><img src="./readme/calculation.png" alt="Calculation Step" style="width: 75%; display: block; margin: 0 auto;"/></figure>
 
-<figure><img src="./readme/result.png" alt="Result Step" style="width: 75%; display: block; margin: 0 auto;"/><figcaption style=" text-align: center;">Result Step</figcaption></figure>
+### Result Step
+<figure><img src="./readme/result.png" alt="Result Step" style="width: 75%; display: block; margin: 0 auto;"/></figure>
