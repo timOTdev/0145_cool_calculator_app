@@ -30,7 +30,7 @@
 ## To edit the source code
 - Github Repo: https://github.com/timh1203/calculator-app
 1. Have NPM and NodeJS installed on your computer
-2. Navigate to the direction of choice and type `git clone https://github.com/timh1203/calculator-app`
+2. Navigate to the directory of choice and type `git clone https://github.com/timh1203/calculator-app`
 3. Alternatively, you can also fork the repo and clone it (no future updates planned)
 4. Open up your favorite editor and have fun
 

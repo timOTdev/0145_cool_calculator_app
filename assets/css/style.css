@@ -105,6 +105,10 @@ a:visited  {
 } 
 
 .footer {
-  margin-top: 2%;
-  font-size: medium;
+  /* margin-top: 2%;
+  font-size: medium; */
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
