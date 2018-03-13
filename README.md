@@ -2,6 +2,16 @@
 
 <figure><img src="./readme/cool-calculator-app.png" alt="The Cool Calculator App" style="width: 60%; display: block; margin-left: auto; margin-right: auto;"/></figure>
 
+## To view this app online
+- To view deployed app, visit: https://timh1203.github.io/calculator-app
+
+## To edit the source code
+- Github Repo: https://github.com/timh1203/calculator-app
+1. Have NPM and NodeJS installed on your computer
+2. Navigate to the directory of choice and type `git clone https://github.com/timh1203/calculator-app`
+3. Alternatively, you can also fork the repo and clone it (no future updates planned)
+4. Open up your favorite editor and have fun
+
 ## About
 - The Calculator App is a basic app that carries out MDAS operations
 - This app is designed for anyone and can be used by everyone
@@ -23,16 +33,6 @@
 - HTML
 - CSS
 - JavaScript
-
-## To view this app online
-- To view deployed app, visit: https://timh1203.github.io/calculator-app
-
-## To edit the source code
-- Github Repo: https://github.com/timh1203/calculator-app
-1. Have NPM and NodeJS installed on your computer
-2. Navigate to the directory of choice and type `git clone https://github.com/timh1203/calculator-app`
-3. Alternatively, you can also fork the repo and clone it (no future updates planned)
-4. Open up your favorite editor and have fun
 
 ## More pictures
 ### Calculation Step
